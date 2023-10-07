@@ -13,11 +13,13 @@
     "@vueuse/core": "^10.4.1",
     "ant-design-vue": "4.x",
     "dayjs": "^1.11.10",
+    "nprogress": "^0.2.0",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
     "vue-router": "4"
   },
   "devDependencies": {
+    "@types/nprogress": "^0.2.1",
     "@vitejs/plugin-vue": "^4.4.0",
     "less": "^4.2.0",
     "typescript": "^5.2.2",
