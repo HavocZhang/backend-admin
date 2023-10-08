@@ -148,13 +148,11 @@ const usernamePlaceholder = computed(() => {
 
 const getCaptcha = () => {
   clearValidate(["captcha"]);
-  if (modelRef.username) {
-    startTime();
-  } else {
-    validate(["username"])
-      .then(() => {})
-      .catch(() => {});
-  }
+  validate(["username"])
+    .then(() => {
+      startTime();
+    })
+    .catch(() => {});
 };
 
 const { time, startTime, isActive } = useCountDown(5);
