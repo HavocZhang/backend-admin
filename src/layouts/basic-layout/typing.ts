@@ -4,6 +4,7 @@ import { numberType, booleanType, eventType } from "@/utils/type";
 export const LayoutProps = {
   collapsedWidth: numberType(48),
   siderWidth: numberType(234),
+  headerHeight: numberType<number>(48),
   collapsed: booleanType<boolean>(false),
   onCollapsed: eventType<(collapsed: boolean) => void>(),
 };

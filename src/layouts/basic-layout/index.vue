@@ -1,23 +1,8 @@
-<template>
-  <div class="basic-layout">
-    <a-layout>
-      <SiderMenu />
-      <a-layout>
-        <a-layout-content class="basic-layout-content" flex flex-col>
-          <div class="h-full flex flex-col flex-1">
-            <slot />
-          </div>
-        </a-layout-content>
-        <a-layout-footer> </a-layout-footer>
-      </a-layout>
-    </a-layout>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { useLayoutProvider } from "./context";
 import { LayoutProps } from "./typing";
 import SiderMenu from "../components/sider-menu/index.vue";
+import Header from "../components/header/index.vue";
 
 const props = defineProps(LayoutProps);
 const emit = defineEmits(["update:collapsed"]);
@@ -35,6 +20,27 @@ useLayoutProvider(props, {
   handleCollapsed,
 });
 </script>
+
+<template>
+  <div class="basic-layout">
+    <a-layout>
+      <SiderMenu />
+      <a-layout>
+        <Header>
+          <template #headerActions>
+            <slot name="headerActions" />
+          </template>
+        </Header>
+        <a-layout-content class="basic-layout-content" flex flex-col>
+          <div class="h-full flex flex-col flex-1">
+            <slot />
+          </div>
+        </a-layout-content>
+        <a-layout-footer> </a-layout-footer>
+      </a-layout>
+    </a-layout>
+  </div>
+</template>
 
 <style lang="less" scoped>
 .basic-layout {

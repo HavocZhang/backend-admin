@@ -3,6 +3,10 @@
     :collapsed="layoutSetting.collapsed"
     @update:collapsed="appStore.toggleCollapsed"
   >
+    <template #headerActions>
+      <MessageBox />
+      <UserAvatar />
+    </template>
     <a-watermark h-full flex flex-col flex-1 content="后台管理系统">
       <RouterView>
         <template #default="{ Component }">

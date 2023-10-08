@@ -11,11 +11,13 @@ const layoutStateFunc = (
   const collapsedWidth = computed(() => props.collapsedWidth);
   const siderWidth = computed(() => props.siderWidth);
   const collapsed = computed(() => props.collapsed);
+  const headerHeight = computed(() => props.headerHeight);
   return {
     collapsed,
     collapsedWidth,
     siderWidth,
     hasPageContainer,
+    headerHeight,
     ...methods,
   };
 };
