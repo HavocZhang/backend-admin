@@ -62,7 +62,7 @@
         <div class="flex" v-else>
           <a-checkbox v-model:checked="modelRef.checked" />
           <div class="ml-2">
-            未注册的手机号/邮箱将自动注册。勾选即代表您同意并接受
+            未注册的手机号将自动注册。勾选即代表您同意并接受
             <a href="/terms/license"> 服务协议 </a>
             与
             <a href="/terms/privacy">隐私政策</a>
