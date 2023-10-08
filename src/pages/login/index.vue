@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import wxFrom from "./components/wxFrom.vue";
 import accountFrom from "./components/accountFrom.vue";
-import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons-vue";
+import {
+  LeftCircleOutlined,
+  RightCircleOutlined,
+  WechatOutlined,
+} from "@ant-design/icons-vue";
 
 const currentTab = ref(0);
 
@@ -52,6 +56,7 @@ const switchTab = () => {
         </Transition>
         <a-divider plain>或</a-divider>
         <a-button block @click="switchTab" size="large">
+          <WechatOutlined v-if="currentTab === 0" />
           {{ btnName }}
         </a-button>
       </div>
