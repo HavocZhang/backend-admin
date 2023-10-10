@@ -1,3 +1,101 @@
+<script setup lang="ts">
+import { Form, message } from 'ant-design-vue'
+import type { Rule } from 'ant-design-vue/es/form'
+
+const [messageApi, contextHolder] = message.useMessage()
+const loginType = ref(0)
+
+const useForm = Form.useForm
+interface FormModel {
+  username: string
+  password: string
+  checked: boolean
+  captcha: string
+}
+const modelRef = reactive<FormModel>({
+  username: '',
+  password: '',
+  checked: false,
+  captcha: '',
+})
+const validateUsername = async (_rule: Rule, value: string) => {
+  if (loginType.value === 0) {
+    if (!value)
+      return Promise.reject(new Error('请输入手机号/邮箱'))
+  }
+  else {
+    if (!value)
+      return Promise.reject(new Error('请输入手机号'))
+
+    if (!/^(1[3456789]|9[28])\d{9}$/.test(value))
+      return Promise.reject(new Error('请输入正确的手机号'))
+  }
+}
+
+const validatePassword = async (_rule: Rule, value: string) => {
+  if (loginType.value === 0) {
+    if (!value)
+      return Promise.reject(new Error('请输入密码'))
+  }
+}
+
+const validateCaptcha = async (_rule: Rule, value: string) => {
+  if (loginType.value !== 0) {
+    if (!value)
+      return Promise.reject(new Error('请输入验证码'))
+  }
+}
+
+const rulesRef = reactive({
+  username: [{ validator: validateUsername, trigger: 'change' }],
+  password: [{ validator: validatePassword, trigger: 'change' }],
+  captcha: [{ validator: validateCaptcha, trigger: 'change' }],
+})
+
+const { clearValidate, resetFields, validate, validateInfos } = useForm(
+  modelRef,
+  rulesRef,
+)
+
+const switchLoginType = () => {
+  resetFields()
+  loginType.value = loginType.value === 0 ? 1 : 0
+}
+
+const usernamePlaceholder = computed(() => {
+  return loginType.value === 0 ? '手机号/邮箱' : '手机号'
+})
+const { time, startTime, isActive } = useCountDown(5)
+
+const getCaptcha = () => {
+  clearValidate(['captcha'])
+  validate(['username'])
+    .then(() => {
+      startTime()
+    })
+    .catch(() => {})
+}
+
+const handleLogin = () => {
+  validate()
+    .then(() => {
+      if (loginType.value !== 0) {
+        if (!modelRef.checked)
+          messageApi.error('请勾选服务协议与隐私政策')
+      }
+    })
+    .catch((_err) => {
+    })
+}
+
+const validateInfosBind = computed(() => {
+  if (loginType.value === 0)
+    return validateInfos.password
+  else
+    return validateInfos.captcha
+})
+</script>
+
 <template>
   <div class="account-from">
     <a-form>
@@ -56,10 +154,10 @@
         </a-button>
       </a-form-item>
       <a-form-item>
-        <div class="flex-center" v-if="loginType === 0 ? true : false">
+        <div v-if="loginType === 0 ? true : false" class="flex-center">
           <p>还没有账号？<a @click="switchLoginType">前往注册</a></p>
         </div>
-        <div class="flex" v-else>
+        <div v-else class="flex">
           <a-checkbox v-model:checked="modelRef.checked" />
           <div class="ml-2">
             未注册的手机号将自动注册。勾选即代表您同意并接受
@@ -74,112 +172,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { Form, message } from "ant-design-vue";
-import type { Rule } from "ant-design-vue/es/form";
-
-const [messageApi, contextHolder] = message.useMessage();
-
-const useForm = Form.useForm;
-interface FormModel {
-  username: string;
-  password: string;
-  checked: boolean;
-  captcha: string;
-}
-const modelRef = reactive<FormModel>({
-  username: "",
-  password: "",
-  checked: false,
-  captcha: "",
-});
-const validateUsername = async (_rule: Rule, value: string) => {
-  if (loginType.value === 0) {
-    if (!value) {
-      return Promise.reject("请输入手机号/邮箱");
-    }
-  } else {
-    if (!value) {
-      return Promise.reject("请输入手机号");
-    }
-    if (!/^(1[3456789]|9[28])\d{9}$/.test(value)) {
-      return Promise.reject("请输入正确的手机号");
-    }
-  }
-};
-
-const validatePassword = async (_rule: Rule, value: string) => {
-  if (loginType.value === 0) {
-    if (!value) {
-      return Promise.reject("请输入密码");
-    }
-  }
-};
-
-const validateCaptcha = async (_rule: Rule, value: string) => {
-  if (loginType.value !== 0) {
-    if (!value) {
-      return Promise.reject("请输入验证码");
-    }
-  }
-};
-
-const rulesRef = reactive({
-  username: [{ validator: validateUsername, trigger: "change" }],
-  password: [{ validator: validatePassword, trigger: "change" }],
-  captcha: [{ validator: validateCaptcha, trigger: "change" }],
-});
-
-const { clearValidate, resetFields, validate, validateInfos } = useForm(
-  modelRef,
-  rulesRef
-);
-
-const loginType = ref(0);
-
-const switchLoginType = () => {
-  resetFields();
-  loginType.value = loginType.value === 0 ? 1 : 0;
-};
-
-const usernamePlaceholder = computed(() => {
-  return loginType.value === 0 ? "手机号/邮箱" : "手机号";
-});
-
-const getCaptcha = () => {
-  clearValidate(["captcha"]);
-  validate(["username"])
-    .then(() => {
-      startTime();
-    })
-    .catch(() => {});
-};
-
-const { time, startTime, isActive } = useCountDown(5);
-
-const handleLogin = () => {
-  validate()
-    .then(() => {
-      console.log(toRaw(modelRef));
-      if (loginType.value !== 0) {
-        if (!modelRef.checked) {
-          messageApi.error("请勾选服务协议与隐私政策");
-        }
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-const validateInfosBind = computed(() => {
-  if (loginType.value === 0) {
-    return validateInfos.password;
-  } else {
-    return validateInfos.captcha;
-  }
-});
-</script>
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {

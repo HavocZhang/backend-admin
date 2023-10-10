@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { UserOutlined } from "@ant-design/icons-vue";
+import { UserOutlined } from '@ant-design/icons-vue'
 </script>
+
 <template>
   <a-dropdown>
     <span
@@ -21,7 +22,9 @@ import { UserOutlined } from "@ant-design/icons-vue";
     </span>
     <template #overlay>
       <a-menu>
-        <a-menu-item key="logout"> 退出登录 </a-menu-item>
+        <a-menu-item key="logout">
+          退出登录
+        </a-menu-item>
       </a-menu>
     </template>
   </a-dropdown>

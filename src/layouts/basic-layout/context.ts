@@ -1,17 +1,18 @@
-import type { LayoutProps } from "./typing";
+import type { LayoutPropsType } from './typing'
+
 export interface LayoutProviderMethods {
-  handleCollapsed?: (collapsed: boolean) => void;
+  handleCollapsed?: (collapsed: boolean) => void
 }
 
 const layoutStateFunc = (
-  props: LayoutProps,
-  methods: LayoutProviderMethods = {}
+  props: LayoutPropsType,
+  methods: LayoutProviderMethods = {},
 ) => {
-  const hasPageContainer = shallowRef(false);
-  const collapsedWidth = computed(() => props.collapsedWidth);
-  const siderWidth = computed(() => props.siderWidth);
-  const collapsed = computed(() => props.collapsed);
-  const headerHeight = computed(() => props.headerHeight);
+  const hasPageContainer = shallowRef(false)
+  const collapsedWidth = computed(() => props.collapsedWidth)
+  const siderWidth = computed(() => props.siderWidth)
+  const collapsed = computed(() => props.collapsed)
+  const headerHeight = computed(() => props.headerHeight)
   return {
     collapsed,
     collapsedWidth,
@@ -19,13 +20,13 @@ const layoutStateFunc = (
     hasPageContainer,
     headerHeight,
     ...methods,
-  };
-};
+  }
+}
 
-const [useLayoutProvider, useLayoutInject] =
-  createInjectionState(layoutStateFunc);
+const [useLayoutProvider, useLayoutInject]
+  = createInjectionState(layoutStateFunc)
 
-export { useLayoutProvider };
+export { useLayoutProvider }
 
 export const useLayoutState = (): ReturnType<typeof layoutStateFunc> =>
-  useLayoutInject()!;
+  useLayoutInject()!

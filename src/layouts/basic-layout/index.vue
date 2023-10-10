@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { useLayoutProvider } from "./context";
-import { LayoutProps } from "./typing";
-import SiderMenu from "../components/sider-menu/index.vue";
-import Header from "../components/header/index.vue";
+import SiderMenu from '../components/sider-menu/index.vue'
+import Header from '../components/header/index.vue'
+import { useLayoutProvider } from './context'
+import { LayoutProps } from './typing'
 
-const props = defineProps(LayoutProps);
-const emit = defineEmits(["update:collapsed"]);
+const props = defineProps(LayoutProps)
+const emit = defineEmits(['update:collapsed'])
 
 /**
  * 处理展开收起的事件参数
  * @param collapsed 展开收起的事件参数
  */
 const handleCollapsed = (collapsed: boolean) => {
-  emit("update:collapsed", collapsed);
-  props?.onCollapsed?.(collapsed);
-};
+  emit('update:collapsed', collapsed)
+  props?.onCollapsed?.(collapsed)
+}
 
 useLayoutProvider(props, {
   handleCollapsed,
-});
+})
 </script>
 
 <template>
@@ -36,7 +36,7 @@ useLayoutProvider(props, {
             <slot />
           </div>
         </a-layout-content>
-        <a-layout-footer> </a-layout-footer>
+        <a-layout-footer />
       </a-layout>
     </a-layout>
   </div>

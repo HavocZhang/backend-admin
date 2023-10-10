@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { useLayoutState } from "../../basic-layout/context";
-const { headerHeight } = useLayoutState();
+import { useLayoutState } from '../../basic-layout/context'
+
+const { headerHeight } = useLayoutState()
 </script>
+
 <template>
   <a-layout-header
     :style="{
@@ -20,6 +22,7 @@ const { headerHeight } = useLayoutState();
     </div>
   </a-layout-header>
 </template>
+
 <style lang="less" scoped>
 .global-header {
   position: relative;

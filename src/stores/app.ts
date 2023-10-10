@@ -1,17 +1,17 @@
 export interface LayoutSetting {
-  collapsed: boolean;
+  collapsed: boolean
 }
 
-export const useAppStore = defineStore("app", () => {
+export const useAppStore = defineStore('app', () => {
   const layoutSetting = reactive<LayoutSetting>({
     collapsed: false,
-  });
+  })
   const toggleCollapsed = (collapsed: boolean) => {
-    layoutSetting.collapsed = collapsed;
-  };
+    layoutSetting.collapsed = collapsed
+  }
 
   return {
     layoutSetting,
     toggleCollapsed,
-  };
-});
+  }
+})

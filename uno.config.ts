@@ -7,9 +7,9 @@ import {
   presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
-} from "unocss";
-import presetChinese from "unocss-preset-chinese";
-import presetEase from "unocss-preset-ease";
+} from 'unocss'
+import presetChinese from 'unocss-preset-chinese'
+import presetEase from 'unocss-preset-ease'
 
 export default defineConfig({
   safelist: [],
@@ -25,16 +25,16 @@ export default defineConfig({
     }),
     presetWebFonts({
       fonts: {
-        sans: "DM Sans",
-        serif: "DM Serif Display",
-        mono: "DM Mono",
+        sans: 'DM Sans',
+        serif: 'DM Serif Display',
+        mono: 'DM Mono',
       },
     }),
   ],
   shortcuts: [
-    ["flex-center", "flex items-center justify-center"],
-    ["flex-between", "flex items-center justify-between"],
-    ["flex-end", "flex items-end justify-between"],
+    ['flex-center', 'flex items-center justify-center'],
+    ['flex-between', 'flex items-center justify-between'],
+    ['flex-end', 'flex items-end justify-between'],
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
-});
+})

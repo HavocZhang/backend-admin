@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { BellOutlined } from "@ant-design/icons-vue";
+import { BellOutlined } from '@ant-design/icons-vue'
+
 const data: string[] = [
-  "Racing car sprays burning fuel into crowd.",
-  "Japanese princess to wed commoner.",
-  "Australian walks 100km after outback crash.",
-  "Man charged over missing wedding girl.",
-  "Los Angeles battles huge wildfires.",
-];
+  'Racing car sprays burning fuel into crowd.',
+  'Japanese princess to wed commoner.',
+  'Australian walks 100km after outback crash.',
+  'Man charged over missing wedding girl.',
+  'Los Angeles battles huge wildfires.',
+]
 </script>
 
 <template>

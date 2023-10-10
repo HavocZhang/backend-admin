@@ -1,25 +1,25 @@
-import { defineConfig } from "vite";
-import { resolve } from "path";
-import vue from "@vitejs/plugin-vue";
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
-import UnoCSS from "unocss/vite";
+import { resolve } from 'node:path'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+import UnoCSS from 'unocss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
       /** @ 符号指向 src 目录 */
-      "@": resolve(__dirname, "./src"),
+      '@': resolve(__dirname, './src'),
     },
   },
   plugins: [
     vue(),
     AutoImport({
-      imports: ["vue", "vue-router", "@vueuse/core", "pinia"],
-      dts: "types/auto-imports.d.ts",
-      dirs: ["src/stores", "src/composables"],
+      imports: ['vue', 'vue-router', '@vueuse/core', 'pinia'],
+      dts: 'types/auto-imports.d.ts',
+      dirs: ['src/stores', 'src/composables'],
     }),
     Components({
       resolvers: [
@@ -27,9 +27,9 @@ export default defineConfig({
           importStyle: false, // css in js
         }),
       ],
-      dts: "types/components.d.ts",
-      dirs: ["src/components"],
+      dts: 'types/components.d.ts',
+      dirs: ['src/components'],
     }),
     UnoCSS(),
   ],
-});
+})

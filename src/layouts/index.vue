@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import BaseLayout from './basic-layout/index.vue'
+import { useAppStore } from '@/stores/app'
+
+const appStore = useAppStore()
+const { layoutSetting } = storeToRefs(appStore)
+</script>
+
 <template>
   <BaseLayout
     :collapsed="layoutSetting.collapsed"
@@ -16,13 +25,5 @@
     </a-watermark>
   </BaseLayout>
 </template>
-
-<script setup lang="ts">
-import { useAppStore } from "@/stores/app";
-import BaseLayout from "./basic-layout/index.vue";
-import { storeToRefs } from "pinia";
-const appStore = useAppStore();
-const { layoutSetting } = storeToRefs(appStore);
-</script>
 
 <style scoped></style>

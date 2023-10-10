@@ -1,45 +1,46 @@
 <script setup lang="ts">
-import wxFrom from "./components/wxFrom.vue";
-import accountFrom from "./components/accountFrom.vue";
 import {
   LeftCircleOutlined,
   RightCircleOutlined,
   WechatOutlined,
-} from "@ant-design/icons-vue";
+} from '@ant-design/icons-vue'
+import wxFrom from './components/wxFrom.vue'
+import accountFrom from './components/accountFrom.vue'
 
-const currentTab = ref(0);
+const currentTab = ref(0)
 
 const tabs = [
   {
-    btnName: "微信登录",
+    btnName: '微信登录',
     component: accountFrom,
   },
   {
-    btnName: "手机号/邮箱登录",
+    btnName: '手机号/邮箱登录',
     component: wxFrom,
   },
-];
+]
 
 const btnName = computed(() => {
-  return tabs[currentTab.value].btnName;
-});
+  return tabs[currentTab.value].btnName
+})
 
 const switchTab = () => {
-  currentTab.value = currentTab.value === 0 ? 1 : 0;
-};
+  currentTab.value = currentTab.value === 0 ? 1 : 0
+}
 </script>
+
 <template>
   <div class="login h-screen flex">
     <div class="w-50%">
       <a-carousel arrows>
         <template #prevArrow>
           <div class="custom-slick-arrow" style="left: 10px; z-index: 1">
-            <left-circle-outlined />
+            <LeftCircleOutlined />
           </div>
         </template>
         <template #nextArrow>
           <div class="custom-slick-arrow" style="right: 10px">
-            <right-circle-outlined />
+            <RightCircleOutlined />
           </div>
         </template>
         <div><h3>1</h3></div>
@@ -50,12 +51,16 @@ const switchTab = () => {
     </div>
     <div class="w-50% flex-center">
       <div class="w-100 p-4">
-        <div class="mb-8 font-size-6">欢迎使用后台管理系统</div>
+        <div class="mb-8 font-size-6">
+          欢迎使用后台管理系统
+        </div>
         <Transition name="fade" mode="out-in">
           <component :is="tabs[currentTab].component" />
         </Transition>
-        <a-divider plain>或</a-divider>
-        <a-button block @click="switchTab" size="large">
+        <a-divider plain>
+          或
+        </a-divider>
+        <a-button block size="large" @click="switchTab">
           <WechatOutlined v-if="currentTab === 0" />
           {{ btnName }}
         </a-button>

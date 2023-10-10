@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import { useLayoutState } from '../../basic-layout/context'
+
+const { collapsedWidth, siderWidth, collapsed, handleCollapsed }
+  = useLayoutState()
+</script>
+
 <template>
   <div
     :style="{
@@ -13,15 +20,8 @@
     :width="siderWidth"
     collapsible
     @collapse="handleCollapsed"
-  ></a-layout-sider>
+  />
 </template>
-
-<script setup lang="ts">
-import { useLayoutState } from "../../basic-layout/context";
-
-const { collapsedWidth, siderWidth, collapsed, handleCollapsed } =
-  useLayoutState();
-</script>
 
 <style scoped>
 .layout-sider-fixed {
