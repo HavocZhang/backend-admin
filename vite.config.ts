@@ -5,17 +5,26 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from 'unocss/vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
-    alias: {
-      /** @ 符号指向 src 目录 */
-      '@': resolve(__dirname, './src'),
-    },
+    alias: [
+      {
+        find: '@',
+        replacement: resolve(__dirname, './src'),
+      },
+      {
+        find: 'vue',
+        replacement: 'vue/dist/vue.esm-bundler.js', // compile template
+      },
+    ],
+    extensions: ['.ts', '.js'],
   },
   plugins: [
     vue(),
+    vueJsx(),
     AutoImport({
       imports: ['vue', 'vue-router', '@vueuse/core', 'pinia'],
       dts: 'types/auto-imports.d.ts',

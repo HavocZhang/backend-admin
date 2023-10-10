@@ -25,7 +25,7 @@ export default [
     component: basicRouteMap.RouteView,
     children: [
       {
-        path: 'analysis',
+        path: '/dashboard/analysis',
         name: 'DashboardAnalysis',
         component: () => import('@/pages/dashboard/analysis/index.vue'),
         meta: {
